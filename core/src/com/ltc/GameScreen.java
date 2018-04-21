@@ -55,6 +55,9 @@ public class GameScreen extends BaseScreen {
 
     private OrthographicCamera camera;
 
+    private Box2DDebugRenderer renderer;
+
+
 
     /**
      * Create the screen. Since this constructor cannot be invoked before libGDX is fully started,
@@ -65,7 +68,7 @@ public class GameScreen extends BaseScreen {
         super(game);
 
         // Create a new Scene2D stage for displaying things.
-        stage = new Stage(new FitViewport(640, 360));
+        stage = new Stage(new FitViewport(1280, 720));
         position = new Vector3(stage.getCamera().position);
 
         // Create a new Box2D world for managing things.
@@ -88,7 +91,7 @@ public class GameScreen extends BaseScreen {
 
         // Create the player. It has an initial position.
         player = factory.createPlayer(world, new Vector2(1.5f, 1.5f));
-        wallExample = factory.createWall(world, new Vector2(1f, 1f), 0.1f, 5f);
+        wallExample = factory.createWall(world, new Vector2(5f, 1f), 0.1f, 1f);
         // This is the main floor. That is why is so long.
 //        floorList.add(factory.createFloor(world, 0, 1000, 1));
 
@@ -120,10 +123,12 @@ public class GameScreen extends BaseScreen {
         stage.getCamera().position.set(position);
         stage.getCamera().update();
 
+
         // Everything is ready, turn the volume up.
 //        backgroundMusic.setVolume(0.75f);
 //        backgroundMusic.play();
 
+        renderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(32, 18);
         camera.translate(0, 1);
     }
@@ -177,8 +182,11 @@ public class GameScreen extends BaseScreen {
         }
 
         // Render the screen. Remember, this is the last step!
-        stage.draw();
+
         camera.update();
+                renderer.render(world, camera.combined);
+
+        stage.draw();
 
     }
 

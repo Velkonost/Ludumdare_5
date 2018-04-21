@@ -96,7 +96,7 @@ public class PlayerEntity extends Actor {
 //            // this speed has to be managed by the forces applied to the player. If we modify
 //            // Y speed, jumps can get very very weir.d
 //            float speedY = body.getLinearVelocity().y;
-//            body.setLinearVelocity(es.danirod.jddprototype.game.Constants.PLAYER_SPEED, speedY);
+            body.setLinearVelocity(8f, 0);
 //        }
 //
 //        // If the player is jumping, apply some opposite force so that the player falls faster.
