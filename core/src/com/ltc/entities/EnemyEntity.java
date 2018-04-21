@@ -50,7 +50,7 @@ public class EnemyEntity extends Actor {
         // Give it some shape.
         PolygonShape box = new PolygonShape();      // (1) Create the shape.
         box.setAsBox(0.5f, 0.5f);                   // (2) 1x1 meter box.
-        fixture = body.createFixture(box, 10000000);       // (3) Create the fixture.
+        fixture = body.createFixture(box, 0);       // (3) Create the fixture.
         fixture.setUserData("enemy");              // (4) Set the user data.
         box.dispose();                              // (5) Destroy the shape.
 
@@ -95,7 +95,7 @@ public class EnemyEntity extends Actor {
             body.setLinearVelocity(body.getLinearVelocity().x, speedUp);
         }
 
-        if (body.getPosition().y > this.playerPosition.x) {
+        if (body.getPosition().y > this.playerPosition.y) {
             body.setLinearVelocity(body.getLinearVelocity().x, -speedUp);
         }
 
