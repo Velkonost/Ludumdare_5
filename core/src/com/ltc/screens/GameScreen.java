@@ -1,4 +1,4 @@
-package com.ltc;
+package com.ltc.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -10,12 +10,14 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.ltc.MainGame;
 import com.ltc.entities.EnemyEntity;
 import com.ltc.entities.EntityFactory;
 import com.ltc.entities.PlayerEntity;
 import com.ltc.entities.WallEntity;
 
 import java.util.ArrayList;
+import java.util.TimerTask;
 
 /**
  * @author Velkonost
@@ -36,8 +38,6 @@ public class GameScreen extends BaseScreen {
     private WallEntity wallExample;
 
     private ArrayList<EnemyEntity> enemies;
-
-    private EnemyEntity enemyEx;
 
 
     /** List of floors attached to this level. */
@@ -80,6 +80,8 @@ public class GameScreen extends BaseScreen {
         world = new World(new Vector2(0, 0), true);
         world.setContactListener(new GameContactListener());
 
+        enemies = new ArrayList<EnemyEntity>();
+
         // Get the sound effect references that will play during the game.
 //        jumpSound = game.getManager().get("audio/jump.ogg");
 //        dieSound = game.getManager().get("audio/die.ogg");
@@ -96,7 +98,6 @@ public class GameScreen extends BaseScreen {
 
         // Create the player. It has an initial position.
         player = factory.createPlayer(world, new Vector2(8f, 1f));
-        enemyEx = factory.createEnemy(this, world, new Vector2(5f, 5f));
 
         // This is the main floor. That is why is so long.
 //        floorList.add(factory.createFloor(world, 0, 1000, 1));
@@ -124,6 +125,7 @@ public class GameScreen extends BaseScreen {
         stage.addActor(factory.createWall(world, new Vector2(9.4f, 8.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
         stage.addActor(factory.createWall(world, new Vector2(9.4f, 16.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
 
+        enemies.add(factory.createEnemy(this, world, new Vector2(5f, 5f), 0));
 
       //Horizontal
         stage.addActor(factory.createWall(world, new Vector2(7.2f, 2.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
@@ -200,8 +202,11 @@ public class GameScreen extends BaseScreen {
 
         // Add the player to the stage too
         stage.addActor(player);
-        stage.addActor(enemyEx);
-        // Reset the camera to the left. This is required because we have translated the camera
+
+
+        for (EnemyEntity enemy : enemies) {
+            stage.addActor(enemy);
+        }
         // during the game. We need to put the camera on the initial position so that you can
         // use it again if you replay the game.
         stage.getCamera().position.set(position);
@@ -231,14 +236,7 @@ public class GameScreen extends BaseScreen {
         // Detach every entity from the world they have been living in.
         wallExample.detach();
         player.detach();
-//        for (FloorEntity floor : floorList)
-//            floor.detach();
-//        for (SpikeEntity spike : spikeList)
-//            spike.detach();
 
-        // Clear the lists.
-//        floorList.clear();
-//        spikeList.clear();
     }
 
     public Vector2 getPlayerPosition() {
@@ -258,19 +256,14 @@ public class GameScreen extends BaseScreen {
         // Update the stage. This will update the player speed.
         stage.act();
         player.processInput();
-        enemyEx.move(getPlayerPosition());
 
+        for (EnemyEntity enemy : enemies) {
+            enemy.move(getPlayerPosition());
+        }
 
         // Step the world. This will update the physics and update entity positions.
         world.step(delta, 6, 2);
 
-        // Make the camera follow the player. As long as the player is alive, if the player is
-        // moving, make the camera move at the same speed, so that the player is always
-        // centered at the same position.
-//        if (player.getX() > 150 && player.isAlive()) {
-//            float speed = 8f * delta * Constants.PIXELS_IN_METER;
-//            stage.getCamera().translate(speed, 0, 0);
-//        }
         stage.getCamera().position.set(new Vector2(player.getX(), player.getY()), 0);
         // Render the screen. Remember, this is the last step!
 
@@ -320,31 +313,59 @@ public class GameScreen extends BaseScreen {
          */
         @Override
         public void beginContact(Contact contact) {
-        }
 
-        public Vector2 getPlayerPosition() {
-            return player.getPosition();
-        }
+            for (EnemyEntity enemy : enemies) {
+                String enemyNick = enemy.getFixt();
 
+                if (areCollided(contact, enemyNick, "wall")) {
+                    enemy.blockMove(true);
+
+                    if (contact.getFixtureB().getUserData().toString().contains("enemy")) {
+                        contact.getFixtureB().getBody().setLinearVelocity(
+                                -contact.getFixtureB().getBody().getLinearVelocity().x,
+                                -contact.getFixtureB().getBody().getLinearVelocity().y
+                        );
+                    } else {
+                        contact.getFixtureA().getBody().setLinearVelocity(
+                                -contact.getFixtureA().getBody().getLinearVelocity().x,
+                                -contact.getFixtureA().getBody().getLinearVelocity().y
+                        );
+                    }
+
+                }
+
+            }
+
+        }
 
         /**
          * This method is executed when a contact has finished: two fixtures are no more colliding.
          */
         @Override
-        public void endContact(Contact contact) {
-            // The player is jumping and it is not touching the floor.
-//            if (areCollided(contact, "player", "floor")) {
-//                if (player.isAlive()) {
-//                    jumpSound.play();
-//                }
-//            }
+        public void endContact(final Contact contact) {
+
+            for (final EnemyEntity enemy : enemies) {
+                String enemyNick = enemy.getFixt();
+
+                if (areCollided(contact, enemyNick, "wall")) {
+
+                    TimerTask enemyTimer = new TimerTask() {
+                        @Override
+                        public void run() {
+                            enemy.blockMove(false);
+                        }
+                    };
+
+                    new java.util.Timer().schedule(enemyTimer, 500);
+
+                }
+
+            }
+
         }
 
         // Here two lonely methods that I don't use but have to override anyway.
         @Override public void preSolve(Contact contact, Manifold oldManifold) { }
         @Override public void postSolve(Contact contact, ContactImpulse impulse) { }
     }
-    
-
-
 }

@@ -4,7 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.ltc.GameScreen;
+import com.ltc.screens.GameScreen;
 
 /**
  * @author Velkonost
@@ -32,9 +32,9 @@ public class EntityFactory {
         return new PlayerEntity(world, playerTexture, position);
     }
 
-    public EnemyEntity createEnemy(GameScreen game, World world, Vector2 position) {
+    public EnemyEntity createEnemy(GameScreen game, World world, Vector2 position, int index) {
         Texture playerTexture = manager.get("player.png");
-        return new EnemyEntity(game, world, playerTexture, position);
+        return new EnemyEntity(game, world, playerTexture, position, index);
     }
 
     public WallEntity createWall(World world, Vector2 position, Float size_x, Float size_y, Float plus_x, Float plus_y, String name, Float box_sizex, Float boxsize_y) {

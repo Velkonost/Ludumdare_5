@@ -3,6 +3,8 @@ package com.ltc;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.ltc.screens.BaseScreen;
+import com.ltc.screens.GameScreen;
 
 public class MainGame extends Game {
 
