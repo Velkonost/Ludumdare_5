@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
@@ -52,6 +53,9 @@ public class GameScreen extends BaseScreen {
     /** Initial position of the camera. Required for reseting the viewport. */
     private Vector3 position;
 
+    private OrthographicCamera camera;
+
+
     /**
      * Create the screen. Since this constructor cannot be invoked before libGDX is fully started,
      * it is safe to do critical code here such as loading assets and setting up the stage.
@@ -84,7 +88,7 @@ public class GameScreen extends BaseScreen {
 
         // Create the player. It has an initial position.
         player = factory.createPlayer(world, new Vector2(1.5f, 1.5f));
-        wallExample = factory.createWall(world, new Vector2(5f, 1f), 0.1f, 5f);
+        wallExample = factory.createWall(world, new Vector2(1f, 1f), 0.1f, 5f);
         // This is the main floor. That is why is so long.
 //        floorList.add(factory.createFloor(world, 0, 1000, 1));
 
@@ -119,6 +123,9 @@ public class GameScreen extends BaseScreen {
         // Everything is ready, turn the volume up.
 //        backgroundMusic.setVolume(0.75f);
 //        backgroundMusic.play();
+
+        camera = new OrthographicCamera(32, 18);
+        camera.translate(0, 1);
     }
 
     /**
@@ -171,6 +178,8 @@ public class GameScreen extends BaseScreen {
 
         // Render the screen. Remember, this is the last step!
         stage.draw();
+        camera.update();
+
     }
 
     /**
