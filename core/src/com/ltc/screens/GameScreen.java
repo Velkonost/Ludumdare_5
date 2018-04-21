@@ -123,19 +123,14 @@ public class GameScreen extends BaseScreen {
       //Vertical
         stage.addActor(factory.createWall(world, new Vector2(9.4f, 6.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
         stage.addActor(factory.createWall(world, new Vector2(9.4f, 8.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
-        stage.addActor(factory.createWall(world, new Vector2(9.4f, 16.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
 
         enemies.add(factory.createEnemy(this, world, new Vector2(5f, 5f), 0));
 
       //Horizontal
         stage.addActor(factory.createWall(world, new Vector2(7.2f, 2.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
         stage.addActor(factory.createWall(world, new Vector2(7.2f, 12.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
-        stage.addActor(factory.createWall(world, new Vector2(9.4f, 12.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
-        stage.addActor(factory.createWall(world, new Vector2(11.6f, 12.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
-        stage.addActor(factory.createWall(world, new Vector2(13.8f, 12.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
-        stage.addActor(factory.createWall(world, new Vector2(16f, 12.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
-        stage.addActor(factory.createWall(world, new Vector2(7.2f, 18.6f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
-        stage.addActor(factory.createWall(world, new Vector2(9.2f, 14.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(11.6f, 15.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(11.6f, 5.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
 
 
 
