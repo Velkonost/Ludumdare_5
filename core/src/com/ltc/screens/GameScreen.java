@@ -1,4 +1,4 @@
-package com.ltc;
+package com.ltc.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.ltc.MainGame;
 import com.ltc.entities.EnemyEntity;
 import com.ltc.entities.EntityFactory;
 import com.ltc.entities.PlayerEntity;
@@ -139,14 +140,7 @@ public class GameScreen extends BaseScreen {
         // Detach every entity from the world they have been living in.
         wallExample.detach();
         player.detach();
-//        for (FloorEntity floor : floorList)
-//            floor.detach();
-//        for (SpikeEntity spike : spikeList)
-//            spike.detach();
 
-        // Clear the lists.
-//        floorList.clear();
-//        spikeList.clear();
     }
 
     public Vector2 getPlayerPosition() {
@@ -174,13 +168,6 @@ public class GameScreen extends BaseScreen {
         // Step the world. This will update the physics and update entity positions.
         world.step(delta, 6, 2);
 
-        // Make the camera follow the player. As long as the player is alive, if the player is
-        // moving, make the camera move at the same speed, so that the player is always
-        // centered at the same position.
-//        if (player.getX() > 150 && player.isAlive()) {
-//            float speed = 8f * delta * Constants.PIXELS_IN_METER;
-//            stage.getCamera().translate(speed, 0, 0);
-//        }
         stage.getCamera().position.set(new Vector2(player.getX(), player.getY()), 0);
         // Render the screen. Remember, this is the last step!
 
@@ -279,8 +266,6 @@ public class GameScreen extends BaseScreen {
                 }
 
             }
-
-
 
         }
 

@@ -1,6 +1,7 @@
-package com.ltc;
+package com.ltc.screens;
 
 import com.badlogic.gdx.Screen;
+import com.ltc.MainGame;
 
 /**
  * @author Velkonost

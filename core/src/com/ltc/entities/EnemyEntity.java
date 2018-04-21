@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.ltc.GameScreen;
+import com.ltc.screens.GameScreen;
 
 import static com.ltc.Constants.PIXELS_IN_METER;
 

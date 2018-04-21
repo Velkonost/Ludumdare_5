@@ -1,4 +1,4 @@
-package com.ltc;
+package com.ltc.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import jdk.nashorn.internal.objects.Global;
+import com.ltc.MainGame;
 
 public class MenuScreen extends BaseScreen implements InputProcessor {
     public MainGame game;
