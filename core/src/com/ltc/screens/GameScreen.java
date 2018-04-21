@@ -175,16 +175,6 @@ public class GameScreen extends BaseScreen {
             stage.addActor(wall);
         }
 
-
-
-
-
-
-
-
-
-
-
         // Add the player to the stage too
         stage.addActor(player);
 
