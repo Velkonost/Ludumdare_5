@@ -215,7 +215,6 @@ public class PlayerEntity extends Actor implements InputProcessor {
         keys.get(keys.put(KeysMove.DOWN, true));
     }
 
-
     //освобождаем флаги
     private void leftReleased() {
         keys.get(keys.put(KeysMove.LEFT, false));
@@ -245,7 +244,6 @@ public class PlayerEntity extends Actor implements InputProcessor {
 
 
         if (keys.get(KeysMove.LEFT)) {
-            System.out.println(111);
             body.setLinearVelocity(-speedUp, body.getLinearVelocity().y);
 //            finishAngle = 90;
 //            isMove = true;

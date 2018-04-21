@@ -16,6 +16,7 @@ import com.ltc.entities.PlayerEntity;
 import com.ltc.entities.WallEntity;
 
 import java.util.ArrayList;
+import java.util.TimerTask;
 
 /**
  * @author Velkonost
@@ -36,8 +37,6 @@ public class GameScreen extends BaseScreen {
     private WallEntity wallExample;
 
     private ArrayList<EnemyEntity> enemies;
-
-    private EnemyEntity enemyEx;
 
 
     /** List of floors attached to this level. */
@@ -80,6 +79,8 @@ public class GameScreen extends BaseScreen {
         world = new World(new Vector2(0, 0), true);
         world.setContactListener(new GameContactListener());
 
+        enemies = new ArrayList<EnemyEntity>();
+
         // Get the sound effect references that will play during the game.
 //        jumpSound = game.getManager().get("audio/jump.ogg");
 //        dieSound = game.getManager().get("audio/die.ogg");
@@ -97,33 +98,16 @@ public class GameScreen extends BaseScreen {
         // Create the player. It has an initial position.
         player = factory.createPlayer(world, new Vector2(8f, 1f));
         wallExample = factory.createWall(world, new Vector2(5f, 1f), 10f, 100f, -10f, -50f);
-        enemyEx = factory.createEnemy(this, world, new Vector2(5f, 5f));
 
-        // This is the main floor. That is why is so long.
-//        floorList.add(factory.createFloor(world, 0, 1000, 1));
-
-        // Now generate some floors over the main floor. Needless to say, that on a real game
-        // this should be better engineered. For instance, have all the information for floors
-        // and spikes in a data structure or even some level file and generate them without
-        // writing lines of code.
-//        floorList.add(factory.createFloor(world, 15, 10, 2));
-//        floorList.add(factory.createFloor(world, 30, 8, 2));
-
-        // Generate some spikes too.
-//        spikeList.add(factory.createSpikes(world, 8, 1));
-//        spikeList.add(factory.createSpikes(world, 23, 2));
-//        spikeList.add(factory.createSpikes(world, 35, 2));
-//        spikeList.add(factory.createSpikes(world, 50, 1));
-
-        // All add the floors and spikes to the stage.
-//        for (FloorEntity floor : floorList)
-//            stage.addActor(floor);
-//        for (SpikeEntity spike : spikeList)
-//            stage.addActor(spike);
+        enemies.add(factory.createEnemy(this, world, new Vector2(5f, 5f), 0));
 
         // Add the player to the stage too.
         stage.addActor(player);
-        stage.addActor(enemyEx);
+
+        for (EnemyEntity enemy : enemies) {
+            stage.addActor(enemy);
+        }
+
         stage.addActor(wallExample);
         // Reset the camera to the left. This is required because we have translated the camera
         // during the game. We need to put the camera on the initial position so that you can
@@ -182,8 +166,10 @@ public class GameScreen extends BaseScreen {
         // Update the stage. This will update the player speed.
         stage.act();
         player.processInput();
-        enemyEx.move(getPlayerPosition());
 
+        for (EnemyEntity enemy : enemies) {
+            enemy.move(getPlayerPosition());
+        }
 
         // Step the world. This will update the physics and update entity positions.
         world.step(delta, 6, 2);
@@ -245,31 +231,61 @@ public class GameScreen extends BaseScreen {
          */
         @Override
         public void beginContact(Contact contact) {
-        }
 
-        public Vector2 getPlayerPosition() {
-            return player.getPosition();
-        }
+            for (EnemyEntity enemy : enemies) {
+                String enemyNick = enemy.getFixt();
 
+                if (areCollided(contact, enemyNick, "wall")) {
+                    enemy.blockMove(true);
+
+                    if (contact.getFixtureB().getUserData().toString().contains("enemy")) {
+                        contact.getFixtureB().getBody().setLinearVelocity(
+                                -contact.getFixtureB().getBody().getLinearVelocity().x,
+                                -contact.getFixtureB().getBody().getLinearVelocity().y
+                        );
+                    } else {
+                        contact.getFixtureA().getBody().setLinearVelocity(
+                                -contact.getFixtureA().getBody().getLinearVelocity().x,
+                                -contact.getFixtureA().getBody().getLinearVelocity().y
+                        );
+                    }
+
+                }
+
+            }
+
+        }
 
         /**
          * This method is executed when a contact has finished: two fixtures are no more colliding.
          */
         @Override
-        public void endContact(Contact contact) {
-            // The player is jumping and it is not touching the floor.
-//            if (areCollided(contact, "player", "floor")) {
-//                if (player.isAlive()) {
-//                    jumpSound.play();
-//                }
-//            }
+        public void endContact(final Contact contact) {
+
+            for (final EnemyEntity enemy : enemies) {
+                String enemyNick = enemy.getFixt();
+
+                if (areCollided(contact, enemyNick, "wall")) {
+
+                    TimerTask enemyTimer = new TimerTask() {
+                        @Override
+                        public void run() {
+                            enemy.blockMove(false);
+                        }
+                    };
+
+                    new java.util.Timer().schedule(enemyTimer, 500);
+
+                }
+
+            }
+
+
+
         }
 
         // Here two lonely methods that I don't use but have to override anyway.
         @Override public void preSolve(Contact contact, Manifold oldManifold) { }
         @Override public void postSolve(Contact contact, ContactImpulse impulse) { }
     }
-    
-
-
 }
