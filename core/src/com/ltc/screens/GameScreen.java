@@ -107,8 +107,19 @@ public class GameScreen extends BaseScreen {
         //Vertical
         walls.add(factory.createWall(world, new Vector2(9.4f, 6.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
         walls.add(factory.createWall(world, new Vector2(9.4f, 8.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
-
-        enemies.add(factory.createEnemy(this, world, new Vector2(5f, 5f), 0));
+        walls.add(factory.createWall(world, new Vector2(12.4f, 18.2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(14.4f, 18.2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(9.4f, 17.f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        walls.add(factory.createWall(world, new Vector2(20.4f, 18.2f), 10f, 300f, -10f, -200f, "wall1", 0.1f, 2f));
+        walls.add(factory.createWall(world, new Vector2(24.4f, 18.2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(24.4f, -0.1f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(20.4f, -0.1f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(22.4f, 1.6f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(18.4f, -0.1f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(14.4f, -0.1f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(14.4f, 2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(7.4f, 16.2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(10.4f, 13.2f), 10f, 100f, -10f, -50f, "wall1", 0.05f, 1f));
 
       //Horizontal
         walls.add(factory.createWall(world, new Vector2(6.1f, 2.2f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
