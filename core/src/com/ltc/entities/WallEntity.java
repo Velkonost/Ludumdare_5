@@ -74,9 +74,10 @@ public class WallEntity extends Actor {
         // Always update the position of the actor when you are going to draw it, so that the
         // position of the actor on the screen is as accurate as possible to the current position
         // of the Box2D body.
+
         setPosition((body.getPosition().x ) * PIXELS_IN_METER,
                 (body.getPosition().y) * PIXELS_IN_METER);
-        batch.draw(texture, getX(), getY(), size_x, size_y);
+        batch.draw(texture, getX()-10f, getY()-50f, size_x, size_y);
     }
 
     @Override
