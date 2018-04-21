@@ -95,8 +95,8 @@ public class EnemyEntity extends Actor {
             body.setLinearVelocity(body.getLinearVelocity().x, speedUp);
         }
 
-        if (body.getPosition().x > this.playerPosition.x) {
-            body.setLinearVelocity(body.getLinearVelocity().y, -speedUp);
+        if (body.getPosition().y > this.playerPosition.x) {
+            body.setLinearVelocity(body.getLinearVelocity().x, -speedUp);
         }
 
     }
