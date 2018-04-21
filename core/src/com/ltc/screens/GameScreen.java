@@ -110,6 +110,7 @@ public class GameScreen extends BaseScreen {
         walls.add(factory.createWall(world, new Vector2(12.4f, 18.2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
         walls.add(factory.createWall(world, new Vector2(14.4f, 18.2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
         walls.add(factory.createWall(world, new Vector2(9.4f, 17.f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        walls.add(factory.createWall(world, new Vector2(20.4f, 18.2f), 10f, 300f, -10f, -200f, "wall1", 0.1f, 2f));
 
 
         //Horizontal
