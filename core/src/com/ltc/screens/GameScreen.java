@@ -119,7 +119,6 @@ public class GameScreen extends BaseScreen {
         walls.add(factory.createWall(world, new Vector2(14.4f, -0.1f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
         walls.add(factory.createWall(world, new Vector2(14.4f, 2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
         walls.add(factory.createWall(world, new Vector2(7.4f, 16.2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
-        walls.add(factory.createWall(world, new Vector2(10.4f, 13.2f), 10f, 100f, -10f, -50f, "wall1", 0.05f, 1f));
 
       //Horizontal
         walls.add(factory.createWall(world, new Vector2(6.1f, 2.2f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
@@ -192,8 +191,12 @@ public class GameScreen extends BaseScreen {
         walls.add(factory.createWall(world, new Vector2(9.4f, 19.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
         walls.add(factory.createWall(world, new Vector2(7.2f, 19.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
 
+        int i = 0;
         for (WallEntity wall : walls) {
             stage.addActor(wall);
+            wall.setName("wall" + i);
+            i ++;
+            wallsHp.add(3);
         }
 
         // Add the player to the stage too
