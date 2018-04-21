@@ -26,7 +26,7 @@ public class MainGame extends Game {
 //		manager.load("gameover.png", Texture.class);
 //		manager.load("overfloor.png", Texture.class);
 //		manager.load("logo.png", Texture.class);
-//		manager.load("spike.png", Texture.class);
+		manager.load("spike.png", Texture.class);
 		manager.load("player.png", Texture.class);
 //		manager.load("audio/die.ogg", Sound.class);
 //		manager.load("audio/jump.ogg", Sound.class);

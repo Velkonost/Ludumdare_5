@@ -1,5 +1,6 @@
 package com.ltc.box2d;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -24,19 +25,19 @@ public class FixtureFactory {
         return fixture;
     }
 
-//    public static Fixture createSpikeFixture(Body pinchoBody) {
-//        // This is the harder shape because it is not a box. I have to design the shape in
-//        // terms of vertices. So I create a vertex array to give the shape all the vertices.
-//        Vector2[] vertices = new Vector2[3];
-//        vertices[0] = new Vector2(-0.5f, -0.5f);
-//        vertices[1] = new Vector2(0.5f, -0.5f);
-//        vertices[2] = new Vector2(0, 0.5f);
-//
-//        PolygonShape shape = new PolygonShape();
-//        shape.set(vertices);
-//        Fixture fixture = pinchoBody.createFixture(shape, 1);
-//        shape.dispose();
-//        return fixture;
-//    }
+    public static Fixture createSpikeFixture(Body pinchoBody) {
+        // This is the harder shape because it is not a box. I have to design the shape in
+        // terms of vertices. So I create a vertex array to give the shape all the vertices.
+        Vector2[] vertices = new Vector2[3];
+        vertices[0] = new Vector2(-0.5f, -0.5f);
+        vertices[1] = new Vector2(0.5f, -0.5f);
+        vertices[2] = new Vector2(0, 0.5f);
+
+        PolygonShape shape = new PolygonShape();
+        shape.set(vertices);
+        Fixture fixture = pinchoBody.createFixture(shape, 1);
+        shape.dispose();
+        return fixture;
+    }
 }
 
