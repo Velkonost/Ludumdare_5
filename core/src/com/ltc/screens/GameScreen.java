@@ -131,6 +131,9 @@ public class GameScreen extends BaseScreen {
         stage.addActor(factory.createWall(world, new Vector2(7.2f, 12.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
         stage.addActor(factory.createWall(world, new Vector2(11.6f, 15.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
         stage.addActor(factory.createWall(world, new Vector2(11.6f, 5.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(16.1f, 8.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(16.1f, 2.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+
 
 
 
