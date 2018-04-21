@@ -45,12 +45,15 @@ public class WallEntity extends Actor {
 
     private float size_x = 1f, size_y = 1f;
 
-    public WallEntity(World world, Texture texture, Vector2 position, Float size_x, Float size_y) {
+    private float plus_x, plus_y;
+
+    public WallEntity(World world, Texture texture, Vector2 position, Float size_x, Float size_y, Float plusX, Float plusY) {
         this.world = world;
         this.texture = texture;
         this.size_x = size_x;
         this.size_y = size_y;
-
+        this.plus_x = plusX;
+        this.plus_y = plusY;
 
         // Create the player body.
         BodyDef def = new BodyDef();                // (1) Create the body definition.
@@ -77,7 +80,7 @@ public class WallEntity extends Actor {
 
         setPosition((body.getPosition().x ) * PIXELS_IN_METER,
                 (body.getPosition().y) * PIXELS_IN_METER);
-        batch.draw(texture, getX()-10f, getY()-50f, size_x, size_y);
+        batch.draw(texture, getX()+plus_x, getY()+plus_y, size_x, size_y);
     }
 
     @Override

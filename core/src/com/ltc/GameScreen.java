@@ -91,7 +91,7 @@ public class GameScreen extends BaseScreen {
 
         // Create the player. It has an initial position.
         player = factory.createPlayer(world, new Vector2(1.5f, 1.5f));
-        wallExample = factory.createWall(world, new Vector2(5f, 1f), 10f, 100f);
+        wallExample = factory.createWall(world, new Vector2(5f, 1f), 10f, 100f, -10f, -50f);
 
         // This is the main floor. That is why is so long.
 //        floorList.add(factory.createFloor(world, 0, 1000, 1));
@@ -233,52 +233,6 @@ public class GameScreen extends BaseScreen {
          */
         @Override
         public void beginContact(Contact contact) {
-            // The player has collided with the floor.
-//            if (areCollided(contact, "player", "floor")) {
-//                player.setJumping(false);
-//
-//                // If the screen is still touched, you have to jump again.
-//                if (Gdx.input.isTouched()) {
-//                    jumpSound.play();
-//
-//                    // You just can't add a force here, because while a contact is being handled
-//                    // the world is locked. Therefore you have to find a way to remember to make
-//                    // the player jump AFTER the collision has been handled. Here I update the
-//                    // flag value mustJump. This will make the player jump on next frame.
-//                    player.setMustJump(true);
-//                }
-//            }
-
-            // The player has collided with something that hurts.
-//            if (areCollided(contact, "player", "spike")) {
-//
-//                // Check that is alive. Sometimes you bounce, you don't want to die more than once.
-//                if (player.isAlive()) {
-//                    player.setAlive(false);
-//
-//                    // Sound feedback.
-//                    backgroundMusic.stop();
-//                    dieSound.play();
-//
-//                    // Add an Action. Actions are cool because they let you add animations to your
-//                    // game. Here I add a sequence action so that two actions happens one after
-//                    // the other. One action is a delay action. It just waits for 1.5 seconds.
-//                    // The second actions is a run action. It executes some code. Here, we go
-//                    // to the game over screen when we die.
-//                    stage.addAction(
-//                            Actions.sequence(
-//                                    Actions.delay(1.5f),
-//                                    Actions.run(new Runnable() {
-//
-//                                        @Override
-//                                        public void run() {
-//                                            game.setScreen(game.gameOverScreen);
-//                                        }
-//                                    })
-//                            )
-//                    );
-//                }
-//            }
         }
 
         /**
@@ -298,4 +252,7 @@ public class GameScreen extends BaseScreen {
         @Override public void preSolve(Contact contact, Manifold oldManifold) { }
         @Override public void postSolve(Contact contact, ContactImpulse impulse) { }
     }
+    
+
+
 }
