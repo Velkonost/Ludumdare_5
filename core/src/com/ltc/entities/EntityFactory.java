@@ -31,6 +31,11 @@ public class EntityFactory {
         return new PlayerEntity(world, playerTexture, position);
     }
 
+    public WallEntity createWall(World world, Vector2 position, Float size_x, Float size_y) {
+        Texture playerTexture = manager.get("player.png");
+        return new WallEntity(world, playerTexture, position, size_x, size_y);
+    }
+
     /**
      * Create floor using the default texture set.
      * @param world     world where the floor will live in.

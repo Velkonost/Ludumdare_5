@@ -11,6 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.ltc.entities.EntityFactory;
 import com.ltc.entities.PlayerEntity;
+import com.ltc.entities.WallEntity;
+
+import java.util.ArrayList;
 
 /**
  * @author Velkonost
@@ -25,6 +28,11 @@ public class GameScreen extends BaseScreen {
 
     /** Player entity. */
     private PlayerEntity player;
+
+    private ArrayList<WallEntity> walls;
+
+    private WallEntity wallExample;
+
 
     /** List of floors attached to this level. */
 //    private List<FloorEntity> floorList = new ArrayList<FloorEntity>();
@@ -76,7 +84,7 @@ public class GameScreen extends BaseScreen {
 
         // Create the player. It has an initial position.
         player = factory.createPlayer(world, new Vector2(1.5f, 1.5f));
-
+        wallExample = factory.createWall(world, new Vector2(5f, 1f), 0.1f, 5f);
         // This is the main floor. That is why is so long.
 //        floorList.add(factory.createFloor(world, 0, 1000, 1));
 
@@ -101,7 +109,7 @@ public class GameScreen extends BaseScreen {
 
         // Add the player to the stage too.
         stage.addActor(player);
-
+        stage.addActor(wallExample);
         // Reset the camera to the left. This is required because we have translated the camera
         // during the game. We need to put the camera on the initial position so that you can
         // use it again if you replay the game.
@@ -125,6 +133,7 @@ public class GameScreen extends BaseScreen {
         stage.clear();
 
         // Detach every entity from the world they have been living in.
+        wallExample.detach();
         player.detach();
 //        for (FloorEntity floor : floorList)
 //            floor.detach();
