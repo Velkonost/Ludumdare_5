@@ -111,7 +111,13 @@ public class GameScreen extends BaseScreen {
         walls.add(factory.createWall(world, new Vector2(14.4f, 18.2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
         walls.add(factory.createWall(world, new Vector2(9.4f, 17.f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
         walls.add(factory.createWall(world, new Vector2(20.4f, 18.2f), 10f, 300f, -10f, -200f, "wall1", 0.1f, 2f));
-
+        walls.add(factory.createWall(world, new Vector2(24.4f, 18.2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(24.4f, -0.1f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(20.4f, -0.1f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(22.4f, 1.6f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(18.4f, -0.1f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(14.4f, -0.1f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(14.4f, 2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
 
         //Horizontal
         walls.add(factory.createWall(world, new Vector2(7.2f, 2.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
