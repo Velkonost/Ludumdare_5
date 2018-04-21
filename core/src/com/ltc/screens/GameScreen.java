@@ -9,15 +9,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.ltc.MainGame;
-import com.ltc.entities.EnemyEntity;
-import com.ltc.entities.EntityFactory;
-import com.ltc.entities.PlayerEntity;
-import com.ltc.entities.WallEntity;
+import com.ltc.entities.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.TimerTask;
+
 
 /**
  * @author Velkonost
@@ -40,6 +40,10 @@ public class GameScreen extends BaseScreen {
     private ArrayList<EnemyEntity> enemies;
 
     private ArrayList<Integer> wallsHp;
+
+    private int bulletDirection;
+
+    private EntityFactory factory;
 
 
     /** List of floors attached to this level. */
@@ -64,6 +68,9 @@ public class GameScreen extends BaseScreen {
 
     private Box2DDebugRenderer renderer;
 
+    private float timeToChangeBulletDirection = 0;
+
+    private float bulletSpeed = 5f;
 
 
     /**
@@ -98,11 +105,11 @@ public class GameScreen extends BaseScreen {
      */
     @Override
     public void show() {
-        EntityFactory factory = new EntityFactory(game.getManager());
+        factory = new EntityFactory(game.getManager());
 
         // Create the player. It has an initial position.
-        player = factory.createPlayer(world, new Vector2(8f, 1f));//
-        enemies.add(factory.createEnemy(this, world, new Vector2(5f, 5f), 0));
+        player = factory.createPlayer(this, world, new Vector2(8f, 1f));//
+        enemies.add(factory.createEnemy(this, world, new Vector2(15f, 5f), 0));
 
         //Vertical
         walls.add(factory.createWall(world, new Vector2(9.4f, 6.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
@@ -238,9 +245,9 @@ public class GameScreen extends BaseScreen {
         int i = 0;
         for (WallEntity wall : walls) {
             stage.addActor(wall);
-            wall.setName("wall" + i);
+            wall.getBody().setUserData("wall" + i);
+            wallsHp.add(i, 5);
             i ++;
-            wallsHp.add(3);
         }
 
         // Add the player to the stage too
@@ -257,6 +264,7 @@ public class GameScreen extends BaseScreen {
         renderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(32, 18);
         camera.translate(0, 1);
+
     }
 
     /**
@@ -279,6 +287,40 @@ public class GameScreen extends BaseScreen {
         return player.getPosition();
     }
 
+    public void shot() {
+        BulletEntity bullet = factory.createBullet(world, player.getPosition());
+
+        switch (bulletDirection) {
+            case 1:
+                bullet.getBody().setLinearVelocity(-bulletSpeed, 0);
+                break;
+            case 2:
+                bullet.getBody().setLinearVelocity(0, bulletSpeed);
+                break;
+            case 3:
+                bullet.getBody().setLinearVelocity(bulletSpeed, 0);
+                break;
+            case 4:
+                bullet.getBody().setLinearVelocity(0, -bulletSpeed);
+                break;
+            case 5:
+                bullet.getBody().setLinearVelocity(bulletSpeed, bulletSpeed);
+                break;
+            case 6:
+                bullet.getBody().setLinearVelocity(bulletSpeed, -bulletSpeed);
+                break;
+            case 7:
+                bullet.getBody().setLinearVelocity(-bulletSpeed, bulletSpeed);
+                break;
+            case 8:
+                bullet.getBody().setLinearVelocity(-bulletSpeed, -bulletSpeed);
+                break;
+        }
+
+        stage.addActor(bullet);
+
+    }
+
     /**
      * This method is executed whenever the game requires this screen to be rendered. This will
      * display things on the screen. This method is also used to update the game.
@@ -293,6 +335,7 @@ public class GameScreen extends BaseScreen {
         stage.act();
         player.processInput();
 
+
         for (EnemyEntity enemy : enemies) {
             enemy.move(getPlayerPosition());
         }
@@ -300,15 +343,39 @@ public class GameScreen extends BaseScreen {
         // Step the world. This will update the physics and update entity positions.
         world.step(delta, 6, 2);
 
+        for (WallEntity wall : walls) {
+            if (wall.hp <= 0) {
+                wall.setDie();
+                wall.addAction(Actions.removeActor());
+                world.destroyBody(wall.getBody());
+                walls.remove(wall);
+                break;
+            }
+        }
+
         stage.getCamera().position.set(new Vector2(player.getX(), player.getY()), 0);
         // Render the screen. Remember, this is the last step!
 
         camera.update();
         renderer.render(world, camera.combined);
 
+
+        timeToChangeBulletDirection += delta;
+        if (timeToChangeBulletDirection >= 1) {
+            changeBulletDirection();
+            timeToChangeBulletDirection = 0;
+        }
+
         stage.draw();
 
     }
+
+    private void changeBulletDirection() {
+        Random rand = new Random();
+        bulletDirection = rand.nextInt((8 - 1) + 1) + 1;
+        System.out.println(bulletDirection);
+    }
+
     /**
      * This method is executed when the screen can be safely disposed.
      * I use this method to dispose things that have to be manually disposed.
@@ -361,17 +428,16 @@ public class GameScreen extends BaseScreen {
                                 -contact.getFixtureB().getBody().getLinearVelocity().x,
                                 -contact.getFixtureB().getBody().getLinearVelocity().y
                         );
+
                     } else {
                         contact.getFixtureA().getBody().setLinearVelocity(
                                 -contact.getFixtureA().getBody().getLinearVelocity().x,
                                 -contact.getFixtureA().getBody().getLinearVelocity().y
                         );
+
                     }
-
                 }
-
             }
-
         }
 
         /**
@@ -384,6 +450,20 @@ public class GameScreen extends BaseScreen {
                 String enemyNick = enemy.getFixt();
 
                 if (areCollided(contact, enemyNick, "wall")) {
+
+                    for (WallEntity wall : walls) {
+                        if (wall.getBody().getUserData().equals(contact.getFixtureA().getBody().getUserData())) {
+                            wall.hp--;
+                            break;
+                        }
+                    }
+
+                    for (WallEntity wall : walls) {
+                        if (wall.getBody().getUserData().equals(contact.getFixtureB().getBody().getUserData())) {
+                            wall.hp--;
+                            break;
+                        }
+                    }
 
                     TimerTask enemyTimer = new TimerTask() {
                         @Override

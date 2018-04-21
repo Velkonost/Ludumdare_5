@@ -93,7 +93,6 @@ public class EnemyEntity extends Actor {
         setPrevPosition(new Vector2(body.getPosition()));
 
         if (ableMove) {
-//            System.out.println(ableMove);
             if (body.getPosition().x < this.playerPosition.x) {
                 body.setLinearVelocity(speedUp, body.getLinearVelocity().y);
             }
@@ -133,9 +132,7 @@ public class EnemyEntity extends Actor {
     }
 
     public void blockMove(boolean ableMove) {
-        System.out.println(ableMove);
         this.ableMove = !ableMove;
-//        body.setLinearVelocity(0, 0);
     }
 
     public String getFixt() {

@@ -47,6 +47,11 @@ public class WallEntity extends Actor {
 
     private float plus_x, plus_y;
 
+    public boolean isRemoved = false;
+
+    public int hp = 5;
+
+
     public WallEntity(World world, Texture texture, Vector2 position, Float size_x, Float size_y, Float plusX, Float plusY, String name, Float box_sizex, Float box_sizey) {
         this.world = world;
         this.texture = texture;
@@ -74,13 +79,14 @@ public class WallEntity extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        // Always update the position of the actor when you are going to draw it, so that the
-        // position of the actor on the screen is as accurate as possible to the current position
-        // of the Box2D body.
-
-        setPosition((body.getPosition().x ) * PIXELS_IN_METER,
-                (body.getPosition().y) * PIXELS_IN_METER);
-        batch.draw(texture, getX()+plus_x, getY()+plus_y, size_x, size_y);
+        if (alive) {
+            setPosition((body.getPosition().x) * PIXELS_IN_METER,
+                    (body.getPosition().y) * PIXELS_IN_METER);
+            batch.draw(texture, getX() + plus_x, getY() + plus_y, size_x, size_y);
+        } else {
+            setPosition(0, 0);
+            batch.draw(texture, 0, 0, 0, 0);
+        }
     }
 
     @Override
@@ -126,6 +132,10 @@ public class WallEntity extends Actor {
 //        }
 //    }
 
+    public Body getBody() {
+        return body;
+    }
+
     public void detach() {
         body.destroyFixture(fixture);
         world.destroyBody(body);
@@ -133,7 +143,20 @@ public class WallEntity extends Actor {
 
     // Getter and setter festival below here.
 
+    public Fixture getFixture() {
+        return fixture;
+    }
+
+    public void removeFixture(){
+        isRemoved = true;
+    }
+
+
     public boolean isAlive() {
         return alive;
+    }
+
+    public void setDie() {
+        alive = false;
     }
 }

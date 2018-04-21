@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.ltc.screens.GameScreen;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,9 +55,13 @@ public class PlayerEntity extends Actor implements InputProcessor {
 
     private float speedUp = 4f;
 
+    private int hp = 2;
+
     public enum KeysMove {
         LEFT, RIGHT, UP, DOWN
     }
+
+    private GameScreen game;
 
     private Map<KeysMove, Boolean> keys = new HashMap<KeysMove, Boolean>();
 
@@ -69,9 +74,10 @@ public class PlayerEntity extends Actor implements InputProcessor {
     }
 
 
-    public PlayerEntity(World world, Texture texture, Vector2 position) {
+    public PlayerEntity(GameScreen game, World world, Texture texture, Vector2 position) {
         this.world = world;
         this.texture = texture;
+        this.game = game;
 
         // Create the player body.
         BodyDef def = new BodyDef();                // (1) Create the body definition.
@@ -89,6 +95,8 @@ public class PlayerEntity extends Actor implements InputProcessor {
         // Set the size to a value that is big enough to be rendered on the screen.
         setSize(PIXELS_IN_METER, PIXELS_IN_METER);
 
+
+
         Gdx.input.setInputProcessor(this);
     }
 
@@ -103,46 +111,7 @@ public class PlayerEntity extends Actor implements InputProcessor {
     }
 
     @Override
-    public void act(float delta) {
-        // Jump when you touch the screen.
-//        if (Gdx.input.justTouched()) {
-//            jump();
-//        }
-//
-//        // Jump if we were required to jump during a collision.
-//        if (mustJump) {
-//            mustJump = false;
-//            jump();
-//        }
-
-//        // If the player is alive, change the speed so that it moves.
-//        if (alive) {
-//            // Only change X speed. Do not change Y speed because if the player is jumping,
-//            // this speed has to be managed by the forces applied to the player. If we modify
-//            // Y speed, jumps can get very very weir.d
-//            float speedY = body.getLinearVelocity().y;
-//            body.setLinearVelocity(8f, 0);
-//        }
-//
-//        // If the player is jumping, apply some opposite force so that the player falls faster.
-//        if (jumping) {
-//            body.applyForceToCenter(0, -es.danirod.jddprototype.game.Constants.IMPULSE_JUMP * 1.15f, true);
-//        }
-    }
-
-//    public void jump() {
-//        // The player must not be already jumping and be alive to jump.
-//        if (!jumping && alive) {
-//            jumping = true;
-//
-//            // Apply an impulse to the player. This will make change the velocity almost
-//            // at the moment unlike using forces, which gradually changes the force used
-//            // during the jump. We get the position becase we have to apply the impulse
-//            // at the center of mass of the body.
-//            Vector2 position = body.getPosition();
-//            body.applyLinearImpulse(0, es.danirod.jddprototype.game.Constants.IMPULSE_JUMP, position.x, position.y, true);
-//        }
-//    }
+    public void act(float delta) {}
 
     public void detach() {
         body.destroyFixture(fixture);
@@ -177,6 +146,8 @@ public class PlayerEntity extends Actor implements InputProcessor {
             upPressed();
         } else if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
             downPressed();
+        } else if (keycode == Input.Keys.SPACE) {
+            game.shot();
         }
         return true;
     }
