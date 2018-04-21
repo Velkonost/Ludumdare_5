@@ -24,7 +24,7 @@ public class MenuScreen extends BaseScreen implements InputProcessor {
     private GameScreen mGameScreen;
 
     private int score;
-
+//
     public MenuScreen(MainGame game) {
         this.game = game;
     }
