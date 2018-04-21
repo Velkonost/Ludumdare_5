@@ -92,6 +92,7 @@ public class GameScreen extends BaseScreen {
         // Create the player. It has an initial position.
         player = factory.createPlayer(world, new Vector2(1.5f, 1.5f));
         wallExample = factory.createWall(world, new Vector2(5f, 1f), 10f, 100f);
+
         // This is the main floor. That is why is so long.
 //        floorList.add(factory.createFloor(world, 0, 1000, 1));
 
@@ -169,6 +170,8 @@ public class GameScreen extends BaseScreen {
 
         // Update the stage. This will update the player speed.
         stage.act();
+        player.processInput();
+
 
         // Step the world. This will update the physics and update entity positions.
         world.step(delta, 6, 2);
@@ -176,15 +179,15 @@ public class GameScreen extends BaseScreen {
         // Make the camera follow the player. As long as the player is alive, if the player is
         // moving, make the camera move at the same speed, so that the player is always
         // centered at the same position.
-        if (player.getX() > 150 && player.isAlive()) {
-            float speed = 8f * delta * Constants.PIXELS_IN_METER;
-            stage.getCamera().translate(speed, 0, 0);
-        }
-
+//        if (player.getX() > 150 && player.isAlive()) {
+//            float speed = 8f * delta * Constants.PIXELS_IN_METER;
+//            stage.getCamera().translate(speed, 0, 0);
+//        }
+        stage.getCamera().position.set(new Vector2(player.getX(), player.getY()), 0);
         // Render the screen. Remember, this is the last step!
 
         camera.update();
-                renderer.render(world, camera.combined);
+        renderer.render(world, camera.combined);
 
         stage.draw();
 
@@ -231,20 +234,20 @@ public class GameScreen extends BaseScreen {
         @Override
         public void beginContact(Contact contact) {
             // The player has collided with the floor.
-            if (areCollided(contact, "player", "floor")) {
-                player.setJumping(false);
-
-                // If the screen is still touched, you have to jump again.
-                if (Gdx.input.isTouched()) {
-                    jumpSound.play();
-
-                    // You just can't add a force here, because while a contact is being handled
-                    // the world is locked. Therefore you have to find a way to remember to make
-                    // the player jump AFTER the collision has been handled. Here I update the
-                    // flag value mustJump. This will make the player jump on next frame.
-                    player.setMustJump(true);
-                }
-            }
+//            if (areCollided(contact, "player", "floor")) {
+//                player.setJumping(false);
+//
+//                // If the screen is still touched, you have to jump again.
+//                if (Gdx.input.isTouched()) {
+//                    jumpSound.play();
+//
+//                    // You just can't add a force here, because while a contact is being handled
+//                    // the world is locked. Therefore you have to find a way to remember to make
+//                    // the player jump AFTER the collision has been handled. Here I update the
+//                    // flag value mustJump. This will make the player jump on next frame.
+//                    player.setMustJump(true);
+//                }
+//            }
 
             // The player has collided with something that hurts.
 //            if (areCollided(contact, "player", "spike")) {
@@ -284,11 +287,11 @@ public class GameScreen extends BaseScreen {
         @Override
         public void endContact(Contact contact) {
             // The player is jumping and it is not touching the floor.
-            if (areCollided(contact, "player", "floor")) {
-                if (player.isAlive()) {
-                    jumpSound.play();
-                }
-            }
+//            if (areCollided(contact, "player", "floor")) {
+//                if (player.isAlive()) {
+//                    jumpSound.play();
+//                }
+//            }
         }
 
         // Here two lonely methods that I don't use but have to override anyway.
