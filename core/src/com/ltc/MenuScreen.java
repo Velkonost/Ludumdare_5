@@ -3,11 +3,14 @@ package com.ltc;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import jdk.nashorn.internal.objects.Global;
 
 public class MenuScreen extends BaseScreen implements InputProcessor {
     public MainGame game;
@@ -35,6 +38,8 @@ public class MenuScreen extends BaseScreen implements InputProcessor {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        drawLabyrinth();
     }
 
     @Override
@@ -78,5 +83,13 @@ public class MenuScreen extends BaseScreen implements InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    public void drawLabyrinth(){
+        ShapeRenderer sr = new ShapeRenderer();
+        sr.setColor(Color.WHITE);
+        sr.begin(ShapeRenderer.ShapeType.Filled);
+        sr.rectLine(0, 50, 30, 50, 10);
+        sr.end();
     }
 }
