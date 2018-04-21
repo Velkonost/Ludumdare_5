@@ -328,7 +328,7 @@ public class GameScreen extends BaseScreen {
     @Override
     public void render(float delta) {
         // Do not forget to clean the screen.
-        Gdx.gl.glClearColor(0.4f, 0.5f, 0.8f, 1f);
+        Gdx.gl.glClearColor(0.4f, 0.7f, 0.2f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Update the stage. This will update the player speed.

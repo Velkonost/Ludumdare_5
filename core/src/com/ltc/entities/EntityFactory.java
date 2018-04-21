@@ -33,7 +33,7 @@ public class EntityFactory {
     }
 
     public EnemyEntity createEnemy(GameScreen game, World world, Vector2 position, int index) {
-        Texture playerTexture = manager.get("player.png");
+        Texture playerTexture = manager.get("enemy.png");
         return new EnemyEntity(game, world, playerTexture, position, index);
     }
 
@@ -43,7 +43,7 @@ public class EntityFactory {
     }
 
     public BulletEntity createBullet(World world, Vector2 position) {
-        Texture playerTexture = manager.get("player.png");
+        Texture playerTexture = manager.get("bullet.png");
         return new BulletEntity(world, playerTexture, position);
 
     }
