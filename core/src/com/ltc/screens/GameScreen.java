@@ -234,7 +234,6 @@ public class GameScreen extends BaseScreen {
         stage.clear();
 
         // Detach every entity from the world they have been living in.
-        wallExample.detach();
         player.detach();
 
     }
