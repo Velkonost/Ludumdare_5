@@ -95,7 +95,7 @@ public class GameScreen extends BaseScreen {
         EntityFactory factory = new EntityFactory(game.getManager());
 
         // Create the player. It has an initial position.
-        player = factory.createPlayer(world, new Vector2(1.5f, 1.5f));
+        player = factory.createPlayer(world, new Vector2(8f, 1f));
         wallExample = factory.createWall(world, new Vector2(5f, 1f), 10f, 100f, -10f, -50f);
         enemyEx = factory.createEnemy(this, world, new Vector2(5f, 5f));
 
