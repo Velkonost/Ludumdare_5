@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.ltc.entities.EnemyEntity;
 import com.ltc.entities.EntityFactory;
 import com.ltc.entities.PlayerEntity;
 import com.ltc.entities.WallEntity;
@@ -33,6 +34,10 @@ public class GameScreen extends BaseScreen {
     private ArrayList<WallEntity> walls;
 
     private WallEntity wallExample;
+
+    private ArrayList<EnemyEntity> enemies;
+
+    private EnemyEntity enemyEx;
 
 
     /** List of floors attached to this level. */
@@ -68,7 +73,7 @@ public class GameScreen extends BaseScreen {
         super(game);
 
         // Create a new Scene2D stage for displaying things.
-        stage = new Stage(new FitViewport(1280, 720));
+        stage = new Stage(new FitViewport(6400, 3600));
         position = new Vector3(stage.getCamera().position);
 
         // Create a new Box2D world for managing things.
@@ -92,6 +97,7 @@ public class GameScreen extends BaseScreen {
         // Create the player. It has an initial position.
         player = factory.createPlayer(world, new Vector2(1.5f, 1.5f));
         wallExample = factory.createWall(world, new Vector2(5f, 1f), 10f, 100f);
+        enemyEx = factory.createEnemy(world, new Vector2(5f, 5f));
 
         // This is the main floor. That is why is so long.
 //        floorList.add(factory.createFloor(world, 0, 1000, 1));
@@ -117,6 +123,7 @@ public class GameScreen extends BaseScreen {
 
         // Add the player to the stage too.
         stage.addActor(player);
+        stage.addActor(enemyEx);
         stage.addActor(wallExample);
         // Reset the camera to the left. This is required because we have translated the camera
         // during the game. We need to put the camera on the initial position so that you can
@@ -280,6 +287,11 @@ public class GameScreen extends BaseScreen {
 //                }
 //            }
         }
+
+        public Vector2 getPlayerPosition() {
+            return player.getPosition();
+        }
+
 
         /**
          * This method is executed when a contact has finished: two fixtures are no more colliding.

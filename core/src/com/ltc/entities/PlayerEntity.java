@@ -287,6 +287,10 @@ public class PlayerEntity extends Actor implements InputProcessor {
         }
     }
 
+    public Vector2 getPosition() {
+        return getPosition();
+    }
+
 
     @Override
     public boolean keyTyped(char character) {
