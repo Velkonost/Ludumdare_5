@@ -76,8 +76,7 @@ public class WallEntity extends Actor {
         // of the Box2D body.
         setPosition((body.getPosition().x - 0.5f) * PIXELS_IN_METER,
                 (body.getPosition().y - 0.5f) * PIXELS_IN_METER);
-        setWidth(size_x);
-        setHeight(size_y);
+        
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 
