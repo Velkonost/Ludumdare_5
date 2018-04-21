@@ -47,7 +47,7 @@ public class WallEntity extends Actor {
 
     private float plus_x, plus_y;
 
-    public WallEntity(World world, Texture texture, Vector2 position, Float size_x, Float size_y, Float plusX, Float plusY) {
+    public WallEntity(World world, Texture texture, Vector2 position, Float size_x, Float size_y, Float plusX, Float plusY, String name, Float box_sizex, Float box_sizey) {
         this.world = world;
         this.texture = texture;
         this.size_x = size_x;
@@ -63,9 +63,9 @@ public class WallEntity extends Actor {
 
         // Give it some shape.
         PolygonShape box = new PolygonShape();      // (1) Create the shape.
-        box.setAsBox(size_x/150, size_y/150);                   // (2) 1x1 meter box.
+        box.setAsBox(box_sizex, box_sizey);                   // (2) 1x1 meter box.
         fixture = body.createFixture(box, 1000000000);       // (3) Create the fixture.
-        fixture.setUserData("wall");              // (4) Set the user data.
+        fixture.setUserData(name);              // (4) Set the user data.
         box.dispose();                              // (5) Destroy the shape.
 
         // Set the size to a value that is big enough to be rendered on the screen.

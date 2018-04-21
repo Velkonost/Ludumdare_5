@@ -96,7 +96,6 @@ public class GameScreen extends BaseScreen {
 
         // Create the player. It has an initial position.
         player = factory.createPlayer(world, new Vector2(8f, 1f));
-        wallExample = factory.createWall(world, new Vector2(5f, 1f), 10f, 100f, -10f, -50f);
         enemyEx = factory.createEnemy(this, world, new Vector2(5f, 5f));
 
         // This is the main floor. That is why is so long.
@@ -120,11 +119,88 @@ public class GameScreen extends BaseScreen {
 //            stage.addActor(floor);
 //        for (SpikeEntity spike : spikeList)
 //            stage.addActor(spike);
+      //Vertical
+        stage.addActor(factory.createWall(world, new Vector2(9.4f, 6.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(9.4f, 8.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(9.4f, 16.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
 
-        // Add the player to the stage too.
+
+      //Horizontal
+        stage.addActor(factory.createWall(world, new Vector2(7.2f, 2.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(7.2f, 12.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(9.4f, 12.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(11.6f, 12.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(13.8f, 12.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(16f, 12.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(7.2f, 18.6f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(9.2f, 14.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+
+
+
+
+
+
+        //Pamki
+
+        stage.addActor(factory.createWall(world, new Vector2(5f, 1f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(5f, 3f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(5f, 5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(5f, 7f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(5f, 9f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(5f, 11f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(5f, 13f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(5f, 15f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(5f, 17f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+
+        stage.addActor(factory.createWall(world, new Vector2(7.2f, -1.3f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(9.4f, -1.3f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(11.6f, -1.3f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(13.8f, -1.3f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(16.0f, -1.3f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(18.2f, -1.3f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(20.4f, -1.3f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(22.6f, -1.3f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(24.8f, -1.3f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(27.0f, -1.3f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(29.2f, -1.3f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+
+        stage.addActor(factory.createWall(world, new Vector2(31.4f, 1f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(31.4f, 3f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(31.4f, 5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(31.4f, 7f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(31.4f, 9f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(31.4f, 13f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(31.4f, 15f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+        stage.addActor(factory.createWall(world, new Vector2(31.4f, 17f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
+
+        stage.addActor(factory.createWall(world, new Vector2(29.2f, 19.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(27.0f, 19.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(24.8f, 19.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(22.6f, 19.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(20.4f, 19.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(18.2f, 19.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(16.0f, 19.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(13.8f, 19.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(11.6f, 19.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(9.4f, 19.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        stage.addActor(factory.createWall(world, new Vector2(7.2f, 19.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // Add the player to the stage too
         stage.addActor(player);
         stage.addActor(enemyEx);
-        stage.addActor(wallExample);
         // Reset the camera to the left. This is required because we have translated the camera
         // during the game. We need to put the camera on the initial position so that you can
         // use it again if you replay the game.
@@ -204,7 +280,6 @@ public class GameScreen extends BaseScreen {
         stage.draw();
 
     }
-
     /**
      * This method is executed when the screen can be safely disposed.
      * I use this method to dispose things that have to be manually disposed.

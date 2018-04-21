@@ -37,9 +37,9 @@ public class EntityFactory {
         return new EnemyEntity(game, world, playerTexture, position);
     }
 
-    public WallEntity createWall(World world, Vector2 position, Float size_x, Float size_y, Float plus_x, Float plus_y) {
+    public WallEntity createWall(World world, Vector2 position, Float size_x, Float size_y, Float plus_x, Float plus_y, String name, Float box_sizex, Float boxsize_y) {
         Texture playerTexture = manager.get("wallTexture.png");
-        return new WallEntity(world, playerTexture, position, size_x, size_y, plus_x, plus_y);
+        return new WallEntity(world, playerTexture, position, size_x, size_y, plus_x, plus_y, name, box_sizex, boxsize_y);
     }
 
     /**
