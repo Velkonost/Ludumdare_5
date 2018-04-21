@@ -70,7 +70,7 @@ public class GameScreen extends BaseScreen {
 
     private float timeToChangeBulletDirection = 0;
 
-    private float bulletSpeed = 5f;
+    private float bulletSpeed = 10f;
 
 
     /**
@@ -82,7 +82,7 @@ public class GameScreen extends BaseScreen {
         super(game);
 
         // Create a new Scene2D stage for displaying things.
-        stage = new Stage(new FitViewport(6400, 3600));
+        stage = new Stage(new FitViewport(640, 360));
         position = new Vector3(stage.getCamera().position);
 
         // Create a new Box2D world for managing things.

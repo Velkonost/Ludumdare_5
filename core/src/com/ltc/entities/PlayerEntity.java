@@ -53,7 +53,7 @@ public class PlayerEntity extends Actor implements InputProcessor {
      */
     private boolean mustJump = false;
 
-    private float speedUp = 4f;
+    private float speedUp = 8f;
 
     private int hp = 2;
 

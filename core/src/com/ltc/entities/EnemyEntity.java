@@ -40,7 +40,7 @@ public class EnemyEntity extends Actor {
 
     private Vector2 playerPosition;
 
-    private float speedUp = 2f;
+    private float speedUp = 10f;
 
     public EnemyEntity(GameScreen game, World world, Texture texture, Vector2 position, int index) {
         this.world = world;
