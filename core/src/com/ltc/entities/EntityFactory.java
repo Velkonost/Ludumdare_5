@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.ltc.GameScreen;
 
 /**
  * @author Velkonost
@@ -31,7 +32,16 @@ public class EntityFactory {
         return new PlayerEntity(world, playerTexture, position);
     }
 
+<<<<<<< HEAD
     public WallEntity createWall(World world, Vector2 position, Float size_x, Float size_y, Float plus_x, Float plus_y) {
+=======
+    public EnemyEntity createEnemy(GameScreen game, World world, Vector2 position) {
+        Texture playerTexture = manager.get("player.png");
+        return new EnemyEntity(game, world, playerTexture, position);
+    }
+
+    public WallEntity createWall(World world, Vector2 position, Float size_x, Float size_y) {
+>>>>>>> 7e602dae49e1c11e9993008e33ef0a8a7895f8e0
         Texture playerTexture = manager.get("wallTexture.png");
         return new WallEntity(world, playerTexture, position, size_x, size_y, plus_x, plus_y);
     }
