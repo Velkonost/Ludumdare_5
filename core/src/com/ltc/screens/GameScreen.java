@@ -123,14 +123,17 @@ public class GameScreen extends BaseScreen {
         walls.add(factory.createWall(world, new Vector2(22.4f, 5.1f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
         walls.add(factory.createWall(world, new Vector2(18.4f, -0.1f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
         walls.add(factory.createWall(world, new Vector2(10.4f, -0.1f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(13.9f, 6.4f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(13.9f, 8.3f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
         walls.add(factory.createWall(world, new Vector2(14.4f, 2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
-        walls.add(factory.createWall(world, new Vector2(7.4f, 16.2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
+        walls.add(factory.createWall(world, new Vector2(7.3f, 15.2f), 10f, 200f, -10f, -100f, "wall1", 0.05f, 1f));
 
       //Horizontal
         walls.add(factory.createWall(world, new Vector2(6.1f, 2.4f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
         walls.add(factory.createWall(world, new Vector2(14.9f, 5.2f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
         walls.add(factory.createWall(world, new Vector2(17.1f, 5.2f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
         walls.add(factory.createWall(world, new Vector2(6.1f, 12.2f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
+        walls.add(factory.createWall(world, new Vector2(8.3f, 12.2f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
         walls.add(factory.createWall(world, new Vector2(8.3f, 12.2f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
         walls.add(factory.createWall(world, new Vector2(8.3f, 18.2f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
         walls.add(factory.createWall(world, new Vector2(10.5f, 12.2f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
@@ -164,8 +167,8 @@ public class GameScreen extends BaseScreen {
         walls.add(factory.createWall(world, new Vector2(25.7f, 12.2f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
         walls.add(factory.createWall(world, new Vector2(27.9f, 12.2f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
         walls.add(factory.createWall(world, new Vector2(30.1f, 12.2f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
-        walls.add(factory.createWall(world, new Vector2(10.5f, 9.8f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
-        walls.add(factory.createWall(world, new Vector2(12.7f, 9.8f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
+        walls.add(factory.createWall(world, new Vector2(10.5f, 10.6f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
+        walls.add(factory.createWall(world, new Vector2(12.7f, 9.3f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
         walls.add(factory.createWall(world, new Vector2(12.7f, 14.7f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
         walls.add(factory.createWall(world, new Vector2(10.5f, 14.7f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
         walls.add(factory.createWall(world, new Vector2(25.9f, 14.7f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
