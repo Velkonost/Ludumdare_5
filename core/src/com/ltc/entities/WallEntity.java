@@ -55,7 +55,7 @@ public class WallEntity extends Actor {
         // Create the player body.
         BodyDef def = new BodyDef();                // (1) Create the body definition.
         def.position.set(position);                 // (2) Put the body in the initial position.
-        def.type = BodyDef.BodyType.DynamicBody;    // (3) Remember to make it dynamic.
+        def.type = BodyDef.BodyType.StaticBody;    // (3) Remember to make it dynamic.
         body = world.createBody(def);               // (4) Now create the body.
 
         // Give it some shape.
@@ -74,9 +74,9 @@ public class WallEntity extends Actor {
         // Always update the position of the actor when you are going to draw it, so that the
         // position of the actor on the screen is as accurate as possible to the current position
         // of the Box2D body.
-        setPosition((body.getPosition().x - 0.5f) * PIXELS_IN_METER,
-                (body.getPosition().y - 0.5f) * PIXELS_IN_METER);
-        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
+        setPosition((body.getPosition().x ) * PIXELS_IN_METER,
+                (body.getPosition().y) * PIXELS_IN_METER);
+        batch.draw(texture, getX(), getY(), size_x, size_y);
     }
 
     @Override

@@ -32,7 +32,7 @@ public class EntityFactory {
     }
 
     public WallEntity createWall(World world, Vector2 position, Float size_x, Float size_y) {
-        Texture playerTexture = manager.get("player.png");
+        Texture playerTexture = manager.get("wallTexture.png");
         return new WallEntity(world, playerTexture, position, size_x, size_y);
     }
 

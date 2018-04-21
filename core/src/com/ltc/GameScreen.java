@@ -91,7 +91,7 @@ public class GameScreen extends BaseScreen {
 
         // Create the player. It has an initial position.
         player = factory.createPlayer(world, new Vector2(1.5f, 1.5f));
-        wallExample = factory.createWall(world, new Vector2(5f, 1f), 0.1f, 1f);
+        wallExample = factory.createWall(world, new Vector2(5f, 1f), 10f, 100f);
         // This is the main floor. That is why is so long.
 //        floorList.add(factory.createFloor(world, 0, 1000, 1));
 
