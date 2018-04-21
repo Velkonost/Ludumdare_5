@@ -61,7 +61,7 @@ public class WallEntity extends Actor {
         // Give it some shape.
         PolygonShape box = new PolygonShape();      // (1) Create the shape.
         box.setAsBox(size_x, size_y);                   // (2) 1x1 meter box.
-        fixture = body.createFixture(box, 3);       // (3) Create the fixture.
+        fixture = body.createFixture(box, 1000000000);       // (3) Create the fixture.
         fixture.setUserData("wall");              // (4) Set the user data.
         box.dispose();                              // (5) Destroy the shape.
 

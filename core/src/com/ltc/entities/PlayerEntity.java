@@ -1,17 +1,23 @@
 package com.ltc.entities;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.ltc.Constants.PIXELS_IN_METER;
 
 /**
  * @author Velkonost
  */
-public class PlayerEntity extends Actor {
+public class PlayerEntity extends Actor implements InputProcessor {
 
     /** The player texture. */
     private Texture texture;
@@ -46,6 +52,23 @@ public class PlayerEntity extends Actor {
      */
     private boolean mustJump = false;
 
+    private float speedUp = 4f;
+
+    public enum KeysMove {
+        LEFT, RIGHT, UP, DOWN
+    }
+
+    private Map<KeysMove, Boolean> keys = new HashMap<KeysMove, Boolean>();
+
+    {
+        keys.put(KeysMove.LEFT, false);
+        keys.put(KeysMove.RIGHT, false);
+        keys.put(KeysMove.UP, false);
+        keys.put(KeysMove.DOWN, false);
+
+    }
+
+
     public PlayerEntity(World world, Texture texture, Vector2 position) {
         this.world = world;
         this.texture = texture;
@@ -59,12 +82,14 @@ public class PlayerEntity extends Actor {
         // Give it some shape.
         PolygonShape box = new PolygonShape();      // (1) Create the shape.
         box.setAsBox(0.5f, 0.5f);                   // (2) 1x1 meter box.
-        fixture = body.createFixture(box, 3);       // (3) Create the fixture.
+        fixture = body.createFixture(box, 0);       // (3) Create the fixture.
         fixture.setUserData("player");              // (4) Set the user data.
         box.dispose();                              // (5) Destroy the shape.
 
         // Set the size to a value that is big enough to be rendered on the screen.
         setSize(PIXELS_IN_METER, PIXELS_IN_METER);
+
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
@@ -96,7 +121,7 @@ public class PlayerEntity extends Actor {
 //            // this speed has to be managed by the forces applied to the player. If we modify
 //            // Y speed, jumps can get very very weir.d
 //            float speedY = body.getLinearVelocity().y;
-            body.setLinearVelocity(8f, 0);
+//            body.setLinearVelocity(8f, 0);
 //        }
 //
 //        // If the player is jumping, apply some opposite force so that the player falls faster.
@@ -140,6 +165,157 @@ public class PlayerEntity extends Actor {
 
     public void setMustJump(boolean mustJump) {
         this.mustJump = mustJump;
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT) {
+            rightPressed();
+        } else if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT) {
+            leftPressed();
+        } else if (keycode == Input.Keys.W || keycode == Input.Keys.UP) {
+            upPressed();
+        } else if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
+            downPressed();
+        }
+        return true;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT) {
+            rightReleased();
+        } else if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT) {
+            leftReleased();
+        } else if (keycode == Input.Keys.W || keycode == Input.Keys.UP) {
+            upReleased();
+        } else if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
+            downReleased();
+        }
+        return true;
+    }
+
+    //флаг устанавливаем, что движемся влево
+    private void leftPressed() {
+        keys.get(keys.put(KeysMove.LEFT, true));
+    }
+
+    //флаг устанавливаем, что движемся вправо
+    private void rightPressed() {
+        keys.get(keys.put(KeysMove.RIGHT, true));
+    }
+
+    //флаг устанавливаем, что движемся вверх
+    private void upPressed() {
+        keys.get(keys.put(KeysMove.UP, true));
+    }
+
+    //флаг устанавливаем, что движемся вниз
+    private void downPressed() {
+        keys.get(keys.put(KeysMove.DOWN, true));
+    }
+
+
+    //освобождаем флаги
+    private void leftReleased() {
+        keys.get(keys.put(KeysMove.LEFT, false));
+    }
+
+    private void rightReleased() {
+        keys.get(keys.put(KeysMove.RIGHT, false));
+    }
+
+    private void upReleased() {
+        keys.get(keys.put(KeysMove.UP, false));
+    }
+
+    private void downReleased() {
+        keys.get(keys.put(KeysMove.DOWN, false));
+    }
+
+    public void resetWay(){
+        rightReleased();
+        leftReleased();
+        downReleased();
+        upReleased();
+    }
+
+    //в зависимости от выбранного направления движения выставляем новое направление движения для персонажа
+    public void processInput() {
+
+
+        if (keys.get(KeysMove.LEFT)) {
+            System.out.println(111);
+            body.setLinearVelocity(-speedUp, body.getLinearVelocity().y);
+//            finishAngle = 90;
+//            isMove = true;
+        }
+        if (keys.get(KeysMove.RIGHT)) {
+            body.setLinearVelocity(speedUp, body.getLinearVelocity().y);
+//            finishAngle = -90;
+//            isMove = true;
+        }
+        if (keys.get(KeysMove.UP)) {
+//            if (game.amountResources >= 9) {
+//                body.setLinearVelocity(body.getLinearVelocity().x, -speedUp);
+//            } else {
+                body.setLinearVelocity(body.getLinearVelocity().x, speedUp);
+//            }
+
+//            finishAngle = 0;
+//            isMove = true;
+        }
+
+        if (keys.get(KeysMove.DOWN)) {
+            body.setLinearVelocity(body.getLinearVelocity().x, -speedUp);
+        }
+
+        //если не выбрано направление, то стоим на месте
+        if ((keys.get(KeysMove.LEFT) && keys.get(KeysMove.RIGHT)) || (!keys.get(KeysMove.LEFT) && (!keys.get(KeysMove.RIGHT)))) {
+            body.setLinearVelocity(0, body.getLinearVelocity().y);
+
+        }
+
+        //если не выбрано направление, то стоим на месте
+        if ((keys.get(KeysMove.UP) && keys.get(KeysMove.DOWN)) || (!keys.get(KeysMove.UP) && (!keys.get(KeysMove.DOWN)))) {
+            body.setLinearVelocity(body.getLinearVelocity().x, 0);
+
+        }
+
+        if (!keys.get(KeysMove.LEFT) && (!keys.get(KeysMove.RIGHT)))  {
+//            isMove = false;
+        }
+    }
+
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
     }
 }
 
