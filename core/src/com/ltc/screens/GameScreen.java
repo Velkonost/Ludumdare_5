@@ -102,12 +102,11 @@ public class GameScreen extends BaseScreen {
 
         // Create the player. It has an initial position.
         player = factory.createPlayer(world, new Vector2(8f, 1f));
+        enemies.add(factory.createEnemy(this, world, new Vector2(5f, 5f), 0));
 
-
-      //Vertical
+        //Vertical
         walls.add(factory.createWall(world, new Vector2(9.4f, 6.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
         walls.add(factory.createWall(world, new Vector2(9.4f, 8.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
-        walls.add(factory.createWall(world, new Vector2(9.4f, 16.5f), 10f, 400f, -10f, -200f, "wall1", 0.1f, 2f));
 
         enemies.add(factory.createEnemy(this, world, new Vector2(5f, 5f), 0));
 
@@ -171,7 +170,6 @@ public class GameScreen extends BaseScreen {
         // Add the player to the stage too
         stage.addActor(player);
 
-
         for (EnemyEntity enemy : enemies) {
             stage.addActor(enemy);
         }
@@ -179,11 +177,6 @@ public class GameScreen extends BaseScreen {
         // use it again if you replay the game.
         stage.getCamera().position.set(position);
         stage.getCamera().update();
-
-
-        // Everything is ready, turn the volume up.
-//        backgroundMusic.setVolume(0.75f);
-//        backgroundMusic.play();
 
         renderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(32, 18);
