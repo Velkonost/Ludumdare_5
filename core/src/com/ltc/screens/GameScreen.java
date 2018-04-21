@@ -112,12 +112,7 @@ public class GameScreen extends BaseScreen {
         enemies.add(factory.createEnemy(this, world, new Vector2(5f, 5f), 0));
 
       //Horizontal
-        walls.add(factory.createWall(world, new Vector2(7.2f, 2.2f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
-        walls.add(factory.createWall(world, new Vector2(7.2f, 12.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
-        walls.add(factory.createWall(world, new Vector2(11.6f, 15.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
-        walls.add(factory.createWall(world, new Vector2(11.6f, 5.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
-        walls.add(factory.createWall(world, new Vector2(11.6f, 5.5f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
-        walls.add(factory.createWall(world, new Vector2(11.6f, 4.4f), 400f, 10f, -205f, 0f, "wall2", 2.2f, 0.1f));
+        walls.add(factory.createWall(world, new Vector2(6.1f, 2.2f), 200f, 10f, -100f, 0f, "wall2", 1.15f, 0.1f));
 
 
 
