@@ -32,22 +32,10 @@ public class EnemyEntity extends Actor {
      */
     private boolean alive = true;
 
-    /**
-     * Is the player jumping? If the player is jumping, then it is not possible to jump again
-     * because the user cannot double jump. The flag has to be set when starting a jump and be
-     * unset when touching the floor again.
-     */
-    private boolean jumping = false;
 
-    /**
-     * Does the player have to jump? This flag is used when the player touches the floor and the
-     * user is still touching the screen, to make a double jump. Remember that we cannot add
-     * a force inside a ContactListener. We have to use this flag to remember that the player
-     * had to jump after the collision.
-     */
-    private boolean mustJump = false;
+    private Vector2 playerPosition;
 
-    private float speedUp = 4f;
+    private float speedUp = 2f;
 
     public EnemyEntity(GameScreen game, World world, Texture texture, Vector2 position) {
         this.world = world;
@@ -88,7 +76,30 @@ public class EnemyEntity extends Actor {
         world.destroyBody(body);
     }
 
-    public void setPlayerPosition(Vector2 playerPosition) {}
+    public void setPlayerPosition(Vector2 playerPosition) {
+        this.playerPosition = playerPosition;
+    }
+
+    public void move(Vector2 playerPosition) {
+        setPlayerPosition(playerPosition);
+
+        if (body.getPosition().x < this.playerPosition.x) {
+            body.setLinearVelocity(speedUp, body.getLinearVelocity().y);
+        }
+
+        if (body.getPosition().x > this.playerPosition.x) {
+            body.setLinearVelocity(-speedUp, body.getLinearVelocity().y);
+        }
+
+        if (body.getPosition().y < this.playerPosition.y) {
+            body.setLinearVelocity(body.getLinearVelocity().x, speedUp);
+        }
+
+        if (body.getPosition().x > this.playerPosition.x) {
+            body.setLinearVelocity(body.getLinearVelocity().y, -speedUp);
+        }
+
+    }
 
 
     // Getter and setter festival below here.
@@ -99,14 +110,6 @@ public class EnemyEntity extends Actor {
 
     public void setAlive(boolean alive) {
         this.alive = alive;
-    }
-
-    public void setJumping(boolean jumping) {
-        this.jumping = jumping;
-    }
-
-    public void setMustJump(boolean mustJump) {
-        this.mustJump = mustJump;
     }
 }
 

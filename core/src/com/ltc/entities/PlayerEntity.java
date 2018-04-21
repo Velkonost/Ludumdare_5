@@ -288,7 +288,7 @@ public class PlayerEntity extends Actor implements InputProcessor {
     }
 
     public Vector2 getPosition() {
-        return getPosition();
+        return body.getPosition();
     }
 
 

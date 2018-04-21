@@ -97,7 +97,7 @@ public class GameScreen extends BaseScreen {
         // Create the player. It has an initial position.
         player = factory.createPlayer(world, new Vector2(1.5f, 1.5f));
         wallExample = factory.createWall(world, new Vector2(5f, 1f), 10f, 100f);
-        enemyEx = factory.createEnemy(world, new Vector2(5f, 5f));
+        enemyEx = factory.createEnemy(this, world, new Vector2(5f, 5f));
 
         // This is the main floor. That is why is so long.
 //        floorList.add(factory.createFloor(world, 0, 1000, 1));
@@ -165,6 +165,10 @@ public class GameScreen extends BaseScreen {
 //        spikeList.clear();
     }
 
+    public Vector2 getPlayerPosition() {
+        return player.getPosition();
+    }
+
     /**
      * This method is executed whenever the game requires this screen to be rendered. This will
      * display things on the screen. This method is also used to update the game.
@@ -178,6 +182,7 @@ public class GameScreen extends BaseScreen {
         // Update the stage. This will update the player speed.
         stage.act();
         player.processInput();
+        enemyEx.move(getPlayerPosition());
 
 
         // Step the world. This will update the physics and update entity positions.
@@ -287,11 +292,6 @@ public class GameScreen extends BaseScreen {
 //                }
 //            }
         }
-
-        public Vector2 getPlayerPosition() {
-            return player.getPosition();
-        }
-
 
         /**
          * This method is executed when a contact has finished: two fixtures are no more colliding.
